@@ -1,0 +1,144 @@
+/* Seção de Perfil */
+#perfil-section {
+     /* Cor de fundo escura, combinando com o tema */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-card {
+    
+    padding: 20px;
+    border-radius: 10px;
+    
+    color: #fff;
+}
+
+.profile-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.profile-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-info strong {
+    font-weight: bold;
+}
+
+#user-name {
+    color: #6165f1;
+    font-weight: bold;
+}
+
+/* Botão de Editar */
+#edit-profile-btn {
+    background-color: #6165f1;
+    width: 90%;
+    display: none;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+#edit-profile-btn:hover {
+    background-color: #4c52d2;
+}
+
+/* Formulário de Edição */
+#edit-profile-form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Ocultado por padrão */
+}
+
+#edit-profile-form h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #6165f1;
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn-submit {
+    background-color: #6165f1;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #4c52d2;
+}
+
+.cancelar {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancelar:hover {
+    background-color: #d32f2f;
+}
+
+/* Estilo para esconder e mostrar o formulário */
+.hidden {
+    display: none;
+}

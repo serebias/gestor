@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor IPTV</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/perfil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Biblioteca para gráficos -->
+</head>
+<body>
+    <button id="menu-toggle">☰</button>
+
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>SR SYSTEMS</h2>
+            <ul>
+                <li><a href="#inicio" class="active"><i class="fa fa-home"></i> Início</a></li>
+                <li><a href="#clientes"><i class="fa fa-users"></i> Clientes</a></li>
+                <li><a href="#planos"><i class="fa fa-cogs"></i> Planos</a></li>
+                <li><a href="#reenvio"><i class="fa fa-sync-alt"></i> Reenvio</a></li>
+                <li><a href="#whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                <li><a href="#perfil"><i class="fa fa-user"></i> Perfil</a></li>
+                <li><button id="logout-btn"> Sair</biutton></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1 id="dashboard-title">Início</h1>
+            </header>
+
+            <!-- Seção Inicial -->
+            <section id="inicio-section" class="section">
+                <div class="overview">
+                    <h2>Bem-vindo ao Painel</h2>
+                    <p>Gerencie seus clientes, seus ganhos com eficiência.</p>
+                </div>
+
+                <!-- Cards de Resumo -->
+                <div class="cards">
+                    <div class="card">
+                        <h3>Clientes Ativos</h3>
+                        <p id="clientes-ativos"></p>
+                    </div>
+                    <div class="card">
+                        <h3>Clientes expirados </h3>
+                        <p id="clientes-expirados"></p>
+                    </div>
+                    <div class="card">
+                        <h3>Clientes prestes a vencer</h3>
+                        <p id="clientes-a-vencer"></p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Valor desse mês</h3>
+                        <p id="valor-mensal"></p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Seção Clientes -->
+            <section id="clientes-section" class="section hidden">
+                <button id="mostarCadastro" class="btn-submit1">Adicionar clientes</button>
+
+                <!-- Formulário de Adição de Cliente -->
+                <form style="display: none;" id="add-client-form" class="form">
+
+                    <div class="input-group">
+                        <label for="client-name">Nome</label>
+                        <input type="text" id="client-name" placeholder="Nome" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="client-phone">Telefone</label>
+                        <input type="tel" id="client-phone" placeholder="Telefone" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="servidor">Servidor</label>
+                        <select id="servidor" required>
+                            <option value="CinePulse">Cine Pulse</option>
+                            <option value="Warez">Warez</option>
+                            <option value="Opera">Opera</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="client-plan-value">Valor do Plano</label>
+                        <input type="number" id="client-plan-value" placeholder="Valor do Plano" required>
+                    </div>
+
+                    <!-- Calendário Visível -->
+                    <div class="input-group">
+                        <label for="client-due-date">Data de Vencimento</label>
+                        <div class="calendar-container">
+                            <input type="text" id="calendar-display" placeholder="Escolha a Data" readonly>
+
+                        </div>
+                    </div>
+                    <div id="calendar" class="calendar">
+                        <!-- Calendário será gerado aqui -->
+                    </div>
+
+                    <div class="button-container">
+                        <button id="submit-button" type="submit" class="btn-submit">Salvar</button>
+                        <button id="cancelar" class="cancelar">Cancelar</button>
+                    </div>
+
+                </form>
+
+                <div id="listaClientes">
+                    <input class="search-input" type="text" id="searchInput" placeholder="Pesquisar por nome..." onkeyup="searchClients()">
+
+                    <!-- Lista de Clientes -->
+                    <div id="clientes-list" class="clients-list">
+                        <!-- Cada cliente será adicionado dinamicamente aqui -->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Seção Perfil -->
+            <section id="perfil-section" class="section hidden">
+                
+                <div class="profile-details">
+                    <div class="profile-card">
+                        <h3>Informações do Usuário</h3>
+                        <div class="profile-info">
+                            <p><strong>Nome:</strong> <span id="user-name"></span></p>
+                            <p><strong>Email:</strong> <span id="user-email"></span></p>
+                            <p><strong>Status:</strong> <span id="user-status"></span></p>
+                            <p><strong>Data de Vencimento:</strong> <span id="user-registration-date"></span></p>
+                            <p><strong>Dispositivos permitidos:</strong> <span id="user-dispositivos"></span></p>
+                            <p><strong>Dispositivos Logados:</strong> <span id="user-logs"></span></p>
+                        </div>
+
+                        <!-- Botão de Editar Nome -->
+                        <button id="edit-profile-btn" class="btn-edit">Editar Nome</button>
+                    </div>
+
+                    <!-- Formulário de Edição -->
+                    <div id="edit-profile-form" class="hidden">
+                        <h3>Editar Nome</h3>
+                        <form id="profile-form" class="form">
+                            <div class="input-group">
+                                <label for="edit-name">Nome</label>
+                                <input type="text" id="edit-name" placeholder="Nome" required>
+                            </div>
+
+                            <div class="button-container">
+                                <button type="submit" class="btn-submit">Salvar Alterações</button>
+                                <button type="button" id="cancel-edit-btn" class="cancelar">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/pt.js"></script>
+    
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/dados.js"></script>
+    <script type="text/javascript" src="js/perfil.js"></script>
+    
+</body>
+</html>
